@@ -233,37 +233,39 @@ public:
 	}
 
 	template<typename TFunc, typename... TArgs>
-	auto Post(std::promise<std::result_of_t<TFunc(TArgs...)>>& promise, TFunc&& func, TArgs&&... args)
+	auto Post(TFunc&& func, TArgs&&... args)
 		-> std::future<std::result_of_t<TFunc(TArgs...)>>
 	{
+		std::shared_ptr<std::promise<std::result_of_t<TFunc(TArgs...)>>> spPromise{ std::make_shared<std::promise<std::result_of_t<TFunc(TArgs...)>>>() };
 		auto task = std::bind(std::forward<TFunc>(func), std::forward<TArgs>(args)...);
-		auto taskWrapper = std::make_shared<Task>( [task, &promise]() noexcept
+		auto taskWrapper = std::make_shared<Task>( [task, spPromise]() noexcept
 		{
-			SetPromise(promise, task);
+			SetPromise(spPromise, task);
 		});
 
 		std::unique_lock<std::mutex> lock{ m_mutex };
 		m_taskQueue->Push(taskWrapper);
 		m_taskQueueChangeSignalBus.notify_one();
 
-		return promise.get_future();
+		return spPromise->get_future();
 	}
 
 	template<typename TFunc>
-	auto Post(std::promise<std::result_of_t<TFunc()>>& promise, TFunc&& func)
+	auto Post(TFunc&& func)
 		-> std::future<std::result_of_t<TFunc()>>
 	{
+		std::shared_ptr<std::promise<std::result_of_t<TFunc()>>> spPromise{ std::make_shared<std::promise<std::result_of_t<TFunc(TArgs...)>>>() };
 		auto task = std::bind(std::forward<TFunc>(func));
-		auto taskWrapper = std::make_shared<Task>( [task, &promise]() noexcept
+		auto taskWrapper = std::make_shared<Task>( [task, spPromise]() noexcept
 		{
-			SetPromise(promise, task);
+			SetPromise(spPromise, task);
 		});
 
 		std::unique_lock<std::mutex> lock{ m_mutex };
 		m_taskQueue->Push(taskWrapper);
 		m_taskQueueChangeSignalBus.notify_one();
 
-		return promise.get_future();
+		return spPromise->get_future();
 	}
 
 	void AddThread() noexcept
@@ -356,16 +358,16 @@ private:
 	};
 
 	template<typename TFunc, typename TResult>
-	static void SetPromise(std::promise<TResult> & promise, TFunc && func) noexcept
+	static void SetPromise(std::shared_ptr<std::promise<TResult>>& spPromise, TFunc && func) noexcept
 	{
-		promise.set_value(func());
+		spPromise->set_value(func());
 	}
 
 	template<typename TFunc>
-	static void SetPromise(std::promise<void> & promise, TFunc && func) noexcept
+	static void SetPromise(std::shared_ptr<std::promise<void>>& spPromise, TFunc && func) noexcept
 	{
 		func();
-		promise.set_value();
+		spPromise->set_value();
 	}
 
 	std::atomic<bool> m_isDone;

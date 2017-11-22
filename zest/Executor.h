@@ -3,32 +3,33 @@
 #define ZEST_LIB_EXECUTOR_H
 
 #include <type_traits>
+#include <functional>
 
 namespace Zest { namespace Lib {
+
+using TFunc = std::function<void()>;
 
 class IExecutor
 {
 public:
-	 template <class TFunc, class... TArgs>
-	 virtual void Post(TFunc&& func, TArgs&&... args) noexcept = 0;
+	virtual void Post(TFunc&& func) noexcept = 0;
+	virtual ~IExecutor() {}
 };
 
 class InlineExecutor : public IExecutor
 {
-	 static InlineExecutor& GetInstance() noexcept
-	 {
-		  static InlineExecutor singletonInlineExecutor;
-		  return singletonInlineExecutor;
-	 }
+public:
+	static InlineExecutor& GetInstance() noexcept
+	{
+		static InlineExecutor singletonInlineExecutor;
+		return singletonInlineExecutor;
+	}
 
-	 template <class TFunc, class... TArgs>
-	 void Post(TFunc&& func, TArgs&&... args) noexcept override
-	 {
-		  func(std::forward<TArgs>(args)...);
-	 }
+	void Post(TFunc&& func) noexcept override
+	{
+		func();
+	}
 };
 
 }}
-
-
 #endif

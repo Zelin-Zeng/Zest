@@ -147,11 +147,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ExecutorTest.cpp" />
+    <ClCompile Include="FunctionTest.cpp" />
     <ClCompile Include="zest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Error.h" />
     <ClInclude Include="Executor.h" />
+    <ClInclude Include="Function.h" />
     <ClInclude Include="Maybe.h" />
     <ClInclude Include="Optional.h" />
     <ClInclude Include="ThreadPool.h" />

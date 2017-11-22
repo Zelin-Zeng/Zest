@@ -18,6 +18,12 @@
     <ClCompile Include="zest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ExecutorTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FunctionTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ThreadPool.h">
@@ -33,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Executor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -17,14 +17,14 @@ struct IError
 };
 
 // Define ErrorCode here
-#define ERRORCODE_LIST(defineError) \
+#define ZEST_DEFINE_ERRORCODE_LIST(defineError) \
 	defineError(TemplateError)\
 	defineError(UnexpectedError)\
 	defineError(AcessDeniedError)\
 	defineError(UnexpectOperationError)\
 
-#define ERRORCODE_VALUE(value) value##,
-#define DEFINE_ERRORCODE(List) enum class ErrorCode : uint32_t { List(ERRORCODE_VALUE) }
+#define ZEST_DEFINE_ERRORCODE_VALUE(value) value##,
+#define ZEST_DEFINE_DEFINE_ERRORCODE(List) enum class ErrorCode : uint32_t { List(ZEST_DEFINE_ERRORCODE_VALUE) }
 /*
 	enum class ErrorCode: uint32_t
 	{
@@ -32,12 +32,12 @@ struct IError
 		...
 	}
 */
-DEFINE_ERRORCODE(ERRORCODE_LIST);
+ZEST_DEFINE_DEFINE_ERRORCODE(ZEST_DEFINE_ERRORCODE_LIST);
 
 // Define Error object
 #define STR_VALUE(value) #value
 
-#define DEFINE_ERROR(value) \
+#define ZEST_DEFINE_DEFINE_ERROR(value) \
 class value: public IError \
 { \
 public:\
@@ -53,7 +53,7 @@ private:\
 static constexpr const char* m_cErrorName{ STR_VALUE(value) };\
 };
 
-ERRORCODE_LIST(DEFINE_ERROR)
+ZEST_DEFINE_ERRORCODE_LIST(ZEST_DEFINE_DEFINE_ERROR)
 
 // Define Error Maker
 #define ErrorMake_CASE(value) \
@@ -62,7 +62,7 @@ case ErrorCode::##value##:\
 	return std::make_unique<##value##>();\
 }
 
-#define DEFINE_ERRORMAKER(List) std::unique_ptr<IError> MakeError(ErrorCode errorCode) noexcept\
+#define ZEST_DEFINE_DEFINE_ERRORMAKER(List) std::unique_ptr<IError> MakeError(ErrorCode errorCode) noexcept\
 {\
 	switch(errorCode)\
 	{\
@@ -72,7 +72,7 @@ case ErrorCode::##value##:\
 	}\
 }
 
-DEFINE_ERRORMAKER(ERRORCODE_LIST)
+ZEST_DEFINE_DEFINE_ERRORMAKER(ZEST_DEFINE_ERRORCODE_LIST)
 
 // Throw exception with error
 class Exception : public std::exception
@@ -98,7 +98,7 @@ void Throw##value##Exception() \
 	throw Exception{ ErrorCode::##value };\
 }
 
-ERRORCODE_LIST(DEFINE_THROWERROR)
+ZEST_DEFINE_ERRORCODE_LIST(DEFINE_THROWERROR)
 
 }}}
 

@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2008
+VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zest", "zest\zest.vcxproj", "{7140F1AD-D02D-43E6-8E6B-5D92C8EFEF00}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gtest", "zest\gtest\googletest\msvc\2010\gtest.vcxproj", "{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{7140F1AD-D02D-43E6-8E6B-5D92C8EFEF00}.Release|x64.Build.0 = Release|x64
 		{7140F1AD-D02D-43E6-8E6B-5D92C8EFEF00}.Release|x86.ActiveCfg = Release|Win32
 		{7140F1AD-D02D-43E6-8E6B-5D92C8EFEF00}.Release|x86.Build.0 = Release|Win32
+		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Debug|x64.ActiveCfg = Debug|x64
+		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Debug|x64.Build.0 = Debug|x64
+		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Debug|x86.ActiveCfg = Debug|Win32
+		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Debug|x86.Build.0 = Debug|Win32
+		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Release|x64.ActiveCfg = Release|x64
+		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Release|x64.Build.0 = Release|x64
+		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Release|x86.ActiveCfg = Release|Win32
+		{C8F6C172-56F2-4E76-B5FA-C3B423B31BE7}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

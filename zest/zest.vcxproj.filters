@@ -32,5 +32,8 @@
     <ClInclude Include="Optional.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Executor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -152,9 +152,11 @@
     <ClCompile Include="zest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dynamics.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="Executor.h" />
     <ClInclude Include="Function.h" />
+    <ClInclude Include="Json\Json.h" />
     <ClInclude Include="Maybe.h" />
     <ClInclude Include="Optional.h" />
     <ClInclude Include="ThreadPool.h" />

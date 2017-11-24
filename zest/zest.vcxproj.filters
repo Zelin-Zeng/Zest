@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{5aab284a-8748-4521-8fcf-58b3326cf3b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="zest.cpp">
@@ -22,6 +25,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FunctionTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DynamicsTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Function.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Json\Json.h">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="Dynamics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

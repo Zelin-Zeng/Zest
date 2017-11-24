@@ -22,6 +22,7 @@ struct IError
 	defineError(UnexpectedError)\
 	defineError(AcessDeniedError)\
 	defineError(UnexpectOperationError)\
+	defineError(CannotCompareError)\
 
 #define ZEST_DEFINE_ERRORCODE_VALUE(value) value##,
 #define ZEST_DEFINE_DEFINE_ERRORCODE(List) enum class ErrorCode : uint32_t { List(ZEST_DEFINE_ERRORCODE_VALUE) }
@@ -93,7 +94,7 @@ private:
 };
 
 #define DEFINE_THROWERROR(value) \
-void Throw##value##Exception() \
+[[noreturn]] void Throw##value##Exception() \
 {\
 	throw Exception{ ErrorCode::##value };\
 }

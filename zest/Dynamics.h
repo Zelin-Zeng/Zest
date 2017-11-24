@@ -139,6 +139,13 @@ protected:
 	{
 		Error::ThrowAcessDeniedErrorException();
 	}
+
+	virtual ValueMap::Object& GetEmptyObject() noexcept
+	{
+		return m_emptyObject;
+	}
+private:
+	ValueMap::Object m_emptyObject;
 };
 
 template<enum class ValueMap::Type>
@@ -175,7 +182,7 @@ protected:
 	{
 		if (index >= m_array.size())
 		{
-			return ValueMap::Object();
+			return GetEmptyObject();
 		}
 		return m_array[index];
 	}
@@ -212,7 +219,7 @@ protected:
 	{
 		if (m_objectMap.find(propertyName) == m_objectMap.end())
 		{
-			return ValueMap::Object();
+			return GetEmptyObject();
 		}
 		return m_objectMap[propertyName];
 	}

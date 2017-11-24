@@ -13,7 +13,7 @@ TEST(DynamicsTest, CreateDynamicArray_GetObjectByIndex)
 	EXPECT_EQ(dynamic2.GetType(), ValueMap::Type::String);
 
 	Dynamic dynamic3{ std::move(dynamic1[2]) };
-	EXPECT_EQ(dynamic2.GetType(), ValueMap::Type::Null);
+	EXPECT_EQ(dynamic3.GetType(), ValueMap::Type::Null);
 }
 
 }

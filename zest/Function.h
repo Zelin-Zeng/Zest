@@ -4,6 +4,7 @@
 
 #include <type_traits>
 #include <memory>
+#include "Error.h"
 
 namespace Zest { namespace Lib {
 

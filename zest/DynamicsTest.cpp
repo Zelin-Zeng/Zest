@@ -2,8 +2,7 @@
 
 #include "Dynamics.h"
 
-namespace Zest {
-namespace Lib {
+namespace Zest { namespace Lib {
 
 TEST(DynamicsTest, CreateDynamicArray_GetObjectByIndex)
 {
@@ -16,6 +15,5 @@ TEST(DynamicsTest, CreateDynamicArray_GetObjectByIndex)
 	EXPECT_EQ(dynamic3.GetType(), ValueMap::Type::Null);
 }
 
-}
-}
+}}
 

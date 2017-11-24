@@ -63,7 +63,7 @@ case ErrorCode::##value##:\
 	return std::make_unique<##value##>();\
 }
 
-#define ZEST_DEFINE_DEFINE_ERRORMAKER(List) std::unique_ptr<IError> MakeError(ErrorCode errorCode) noexcept\
+#define ZEST_DEFINE_DEFINE_ERRORMAKER(List) inline std::unique_ptr<IError> MakeError(ErrorCode errorCode) noexcept\
 {\
 	switch(errorCode)\
 	{\
@@ -94,7 +94,7 @@ private:
 };
 
 #define DEFINE_THROWERROR(value) \
-[[noreturn]] void Throw##value##Exception() \
+[[noreturn]] inline void Throw##value##Exception() \
 {\
 	throw Exception{ ErrorCode::##value };\
 }

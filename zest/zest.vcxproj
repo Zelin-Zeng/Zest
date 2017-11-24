@@ -150,6 +150,7 @@
     <ClCompile Include="DynamicsTest.cpp" />
     <ClCompile Include="ExecutorTest.cpp" />
     <ClCompile Include="FunctionTest.cpp" />
+    <ClCompile Include="OptionalTest.cpp" />
     <ClCompile Include="zest.cpp" />
   </ItemGroup>
   <ItemGroup>

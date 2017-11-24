@@ -9,11 +9,6 @@
 
 namespace Zest { namespace Lib {
 
-// Placeholder
-struct in_place_t
-{
-};
-
 struct TNull
 {
 };
@@ -73,7 +68,7 @@ struct OptionalStorage
 	{
 		if (IsEngaged())
 		{
-			GetValuePointer().~TValue();
+			GetValuePointer()->~TValue();
 			m_engaged = false;
 		}
 	}
@@ -99,6 +94,8 @@ class Optional : Details::OptionalStorage<TValue, std::is_trivially_destructible
 {
 	template<class TUnknown>
 	friend constexpr bool operator==(const Optional<TUnknown>& lhs, TNull) noexcept;
+	template<class TUnknown>
+	friend constexpr bool operator!=(const Optional<TUnknown>& lhs, TNull) noexcept;
 public:
 	static_assert(!std::is_reference<TValue>::value, "Optional may not be used with reference types");
 	static_assert(!std::is_abstract<TValue>::value, "Optional may not be used with abstract types");
@@ -117,7 +114,7 @@ public:
 	}
 
 	template<typename... TArgs>
-	Optional(in_place_t, TArgs&&... args) noexcept(std::is_nothrow_constructible_v<TValue, TArgs...>)
+	Optional(TNull, TArgs&&... args) noexcept(std::is_nothrow_constructible_v<TValue, TArgs...>)
 	{
 		ConstructInPlace(std::forward<TArgs>(args)...);
 	}
@@ -149,6 +146,11 @@ public:
 	{
 		return *(this->GetValuePointer());
 	}
+
+	bool operator()() noexcept
+	{
+		return this->IsEngaged();
+	}
 };
 
 template<typename TValue>
@@ -177,6 +179,12 @@ template<typename TValue>
 constexpr bool operator!=(const Optional<TValue>& lhs, const Optional<TValue>& rhs) noexcept
 {
 	return !(lhs == rhs);
+}
+
+template<typename TValue>
+constexpr bool operator!=(const Optional<TValue>& lhs, TNull) noexcept
+{
+	return lhs.IsEngaged();
 }
 
 }}

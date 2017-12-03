@@ -604,118 +604,118 @@ public:
 };
 
 
-Dynamic::Dynamic()
+inline Dynamic::Dynamic()
 	: m_type(ValueMap::Type::Null)
 {
 }
 
-Dynamic::Dynamic(Dynamic&& dynamicValue)
+inline Dynamic::Dynamic(Dynamic&& dynamicValue)
 	: m_type(dynamicValue.GetType()),
 	m_spDynamicData{ std::move(dynamicValue.m_spDynamicData) }
 {
 }
 
-Dynamic::Dynamic(const Dynamic& dynamicValue)
+inline Dynamic::Dynamic(const Dynamic& dynamicValue)
 	: m_type(dynamicValue.GetType()),
 	m_spDynamicData{ std::move(dynamicValue.m_spDynamicData) }
 {
 }
 
-Dynamic::Dynamic(ValueMap::Array&& arrayValue)
+inline Dynamic::Dynamic(ValueMap::Array&& arrayValue)
 	: m_type(ValueMap::Type::Array),
 	m_spDynamicData{ std::make_shared<DynamicData<ValueMap::Type::Array>>(std::move(arrayValue)) }
 {
 }
 
-Dynamic::Dynamic(std::initializer_list<ValueMap::Object> initlist)
+inline Dynamic::Dynamic(std::initializer_list<ValueMap::Object> initlist)
 	: m_type(ValueMap::Type::Array),
 	m_spDynamicData{ std::make_shared<DynamicData<ValueMap::Type::Array>>(initlist) }
 {
 }
 
-Dynamic::Dynamic(std::initializer_list<std::pair<ValueMap::String, ValueMap::Object>> initlist)
+inline Dynamic::Dynamic(std::initializer_list<std::pair<ValueMap::String, ValueMap::Object>> initlist)
 	: m_type(ValueMap::Type::Object),
 	m_spDynamicData{ std::make_shared<DynamicData<ValueMap::Type::Object>>(initlist) }
 {
 }
 
-Dynamic::Dynamic(const ValueMap::String& stringValue)
+inline Dynamic::Dynamic(const ValueMap::String& stringValue)
 	: m_type(ValueMap::Type::String),
 	m_spDynamicData{ std::make_shared<DynamicData<ValueMap::Type::String>>(stringValue) }
 {
 }
 
-Dynamic::Dynamic(const char* charValue)
+inline Dynamic::Dynamic(const char* charValue)
 	: m_type(ValueMap::Type::String),
 	m_spDynamicData{ std::make_shared<DynamicData<ValueMap::Type::String>>(charValue?std::string(charValue):std::string()) }
 {
 }
 
-Dynamic::Dynamic(const ValueMap::Bool boolValue)
+inline Dynamic::Dynamic(const ValueMap::Bool boolValue)
 	: m_type(ValueMap::Type::Bool),
 	m_spDynamicData{ std::make_shared<DynamicData<ValueMap::Type::Bool>>(boolValue) }
 {
 }
 
-Dynamic::Dynamic(const ValueMap::Int32 int32Value)
+inline Dynamic::Dynamic(const ValueMap::Int32 int32Value)
 	: m_type(ValueMap::Type::Int32),
 	m_spDynamicData{ std::make_shared<DynamicData<ValueMap::Type::Int32>>(int32Value) }
 {
 }
 
-Dynamic::Dynamic(const ValueMap::Int64 int64Value)
+inline Dynamic::Dynamic(const ValueMap::Int64 int64Value)
 	: m_type(ValueMap::Type::Int64),
 	m_spDynamicData{ std::make_shared<DynamicData<ValueMap::Type::Int64>>(int64Value) }
 {
 }
 
-Dynamic::Dynamic(const ValueMap::Double doubleValue)
+inline Dynamic::Dynamic(const ValueMap::Double doubleValue)
 	: m_type(ValueMap::Type::Int64),
 	m_spDynamicData{ std::make_shared<DynamicData<ValueMap::Type::Double>>(doubleValue) }
 {
 }
 
-ValueMap::Array& Dynamic::GetArray()
+inline ValueMap::Array& Dynamic::GetArray()
 {
 	return m_spDynamicData->GetArray();
 }
 
-ValueMap::Bool Dynamic::GetBool() const
+inline ValueMap::Bool Dynamic::GetBool() const
 {
 	return m_spDynamicData->GetBool();
 }
 
-ValueMap::Int32 Dynamic::GetInt32() const
+inline ValueMap::Int32 Dynamic::GetInt32() const
 {
 	return m_spDynamicData->GetInt32();
 }
 
-ValueMap::Int64 Dynamic::GetInt64() const
+inline ValueMap::Int64 Dynamic::GetInt64() const
 {
 	return m_spDynamicData->GetInt64();
 }
 
-ValueMap::Double Dynamic::GetDouble() const
+inline ValueMap::Double Dynamic::GetDouble() const
 {
 	return m_spDynamicData->GetDouble();
 }
 
-const ValueMap::String& Dynamic::GetString() const
+inline const ValueMap::String& Dynamic::GetString() const
 {
 	return m_spDynamicData->GetString();
 }
 
-ValueMap::Object& Dynamic::GetObject(const std::size_t index)
+inline ValueMap::Object& Dynamic::GetObject(const std::size_t index)
 {
 	return m_spDynamicData->GetObject(index);
 }
 
-ValueMap::Object& Dynamic::GetObject(const ValueMap::String& propertyName)
+inline ValueMap::Object& Dynamic::GetObject(const ValueMap::String& propertyName)
 {
 	return m_spDynamicData->GetObject(propertyName);
 }
 
-bool Dynamic::operator==(const Dynamic& other)const
+inline bool Dynamic::operator==(const Dynamic& other)const
 {
 	if (this == &other)
 	{
@@ -726,12 +726,12 @@ bool Dynamic::operator==(const Dynamic& other)const
 	return result != IDynamicData::CompareResult::Equal;
 }
 
-bool Dynamic::operator()() const
+inline bool Dynamic::operator()() const
 {
 	return m_spDynamicData->GetBool();
 }
 
-bool Dynamic::operator>(const Dynamic& other) const
+inline bool Dynamic::operator>(const Dynamic& other) const
 {
 	IDynamicData::CompareResult result{ m_spDynamicData->Compare(other) };
 	if (result == IDynamicData::CompareResult::NotComparable)
@@ -742,7 +742,7 @@ bool Dynamic::operator>(const Dynamic& other) const
 	return result == IDynamicData::CompareResult::Larger;
 }
 
-bool Dynamic::operator<(const Dynamic& other) const
+inline bool Dynamic::operator<(const Dynamic& other) const
 {
 	IDynamicData::CompareResult result{ m_spDynamicData->Compare(other) };
 	if (result == IDynamicData::CompareResult::NotComparable)
@@ -753,7 +753,7 @@ bool Dynamic::operator<(const Dynamic& other) const
 	return result == IDynamicData::CompareResult::Less;
 }
 
-ValueMap::Object& Dynamic::operator[](const std::size_t index)
+inline ValueMap::Object& Dynamic::operator[](const std::size_t index)
 {
 	if (GetType() != ValueMap::Type::Array)
 	{
@@ -762,7 +762,7 @@ ValueMap::Object& Dynamic::operator[](const std::size_t index)
 	return m_spDynamicData->GetObject(index);
 }
 
-ValueMap::Object& Dynamic::operator[](const ValueMap::String propertyName)
+inline ValueMap::Object& Dynamic::operator[](const ValueMap::String propertyName)
 {
 	if (GetType() != ValueMap::Type::Object)
 	{
@@ -771,20 +771,20 @@ ValueMap::Object& Dynamic::operator[](const ValueMap::String propertyName)
 	return m_spDynamicData->GetObject(propertyName);
 }
 
-Dynamic& Dynamic::operator=(const Dynamic& other)
+inline Dynamic& Dynamic::operator=(const Dynamic& other)
 {
 	m_type = other.GetType();
 	m_spDynamicData = other.m_spDynamicData;
 	return *this;
 }
-Dynamic& Dynamic::operator=(Dynamic&& other)
+inline Dynamic& Dynamic::operator=(Dynamic&& other)
 {
 	m_type = other.GetType();
 	m_spDynamicData = other.m_spDynamicData;
 	return *this;
 }
 
-ValueMap::Type Dynamic::GetType() const noexcept
+inline ValueMap::Type Dynamic::GetType() const noexcept
 {
 	return m_type;
 }

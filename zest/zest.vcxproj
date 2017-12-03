@@ -158,7 +158,9 @@
     <ClInclude Include="Error.h" />
     <ClInclude Include="Executor.h" />
     <ClInclude Include="Function.h" />
+    <ClInclude Include="Json-inl.h" />
     <ClInclude Include="Json\Json.h" />
+    <ClInclude Include="Json\JsonParser.h" />
     <ClInclude Include="Maybe.h" />
     <ClInclude Include="Optional.h" />
     <ClInclude Include="ThreadPool.h" />

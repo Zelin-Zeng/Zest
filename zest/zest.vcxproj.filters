@@ -53,16 +53,10 @@
     <ClInclude Include="Function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Json\Json.h">
-      <Filter>Json</Filter>
-    </ClInclude>
     <ClInclude Include="Dynamics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Json\JsonParser.h">
-      <Filter>Json</Filter>
-    </ClInclude>
-    <ClInclude Include="Json-inl.h">
+    <ClInclude Include="Json\json.h">
       <Filter>Json</Filter>
     </ClInclude>
   </ItemGroup>

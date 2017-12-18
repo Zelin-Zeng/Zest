@@ -155,12 +155,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dynamics.h" />
+    <ClInclude Include="Encoding.h" />
     <ClInclude Include="Error.h" />
     <ClInclude Include="Executor.h" />
     <ClInclude Include="Function.h" />
     <ClInclude Include="Json\json.h" />
     <ClInclude Include="Maybe.h" />
     <ClInclude Include="Optional.h" />
+    <ClInclude Include="Stream.h" />
     <ClInclude Include="ThreadPool.h" />
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,9 @@ namespace Zest { namespace Lib {
 
 struct Encoding
 {
+	using CODEPONT = char;
 	using BYTE = uint8_t;
+	using WIDECHAR = wchar_t;
 	enum class Type {
 		ASCII,
 		UTF8,

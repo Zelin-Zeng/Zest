@@ -11,15 +11,6 @@ namespace Zest { namespace Lib {
 
 struct IStream
 {
-	virtual std::vector<Encoding::BYTE> Read(size_t readSize = DEFAULT_READ_SIZE) = 0;
-	virtual Encoding::BYTE Peek() = 0;
-	virtual void Seek(size_t seekSize) = 0;
-
-};
-
-class CodePoint
-{
-
 };
 
 }}

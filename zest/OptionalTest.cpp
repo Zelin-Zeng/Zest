@@ -1,3 +1,5 @@
+#include "CommonTest.h"
+
 #include <gtest/gtest.h>
 
 #include "Optional.h"
